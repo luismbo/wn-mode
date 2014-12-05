@@ -3,6 +3,7 @@
 ;; This library was found at the Emacs Wiki and is probably in the
 ;; public domain.
 
+;; URL: https://github.com/luismbo/wn-mode
 ;; Author: Anonymous
 ;; Maintainer: Luís Oliveira <luismbo@gmail.com>
 ;; Keywords: buffers windows switching-windows
