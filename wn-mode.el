@@ -71,6 +71,17 @@ convenient but overrides built-in Emacs keybindings.")
   "wn-mode's keymap.")
 
 ;;;###autoload
+(defun remake-wn-mode-map ()
+  "Updates wn-mode-map and reloads wn-mode when it's active."
+  (interactive)
+  (let ((reactivate-wn-mode wn-mode))
+    (when wn-mode
+      (wn-mode 0))
+    (setq wn-mode-map (make-wn-mode-map))
+    (when reactivate-wn-mode
+      (wn-mode 1))))
+
+;;;###autoload
 (define-minor-mode wn-mode
   "A minor mode that enables quick selection of windows."
   :group 'windows
