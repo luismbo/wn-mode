@@ -17,7 +17,7 @@
 ;;   (wn-mode)
 ;; to your `~/.emacs'.
 ;;
-;; By default the shortcuts are M-0, M-1, ..., M-9, M-#.
+;; By default, the shortcuts are M-1, ..., M-9, M-0, M-#.
 ;;
 ;; Customize `wn-keybinding-format' if you wish to use different key
 ;; bindings, e.g.:
