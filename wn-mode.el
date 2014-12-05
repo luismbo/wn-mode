@@ -74,7 +74,7 @@ convenient but overrides built-in Emacs keybindings.")
 
 ;;;###autoload
 (defun remake-wn-mode-map ()
-  "Updates wn-mode-map and reloads wn-mode when it's active."
+  "Update wn-mode-map and reload `wn-mode' if it's active."
   (interactive)
   (let ((reactivate-wn-mode wn-mode))
     (when wn-mode
