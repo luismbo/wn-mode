@@ -6,6 +6,7 @@
 ;; URL: https://github.com/luismbo/wn-mode
 ;; Author: Anonymous
 ;; Maintainer: Luís Oliveira <luismbo@gmail.com>
+;; Package-Requires: ((emacs "24"))
 ;; Keywords: buffers windows switching-windows
 
 ;;; Commentary:
