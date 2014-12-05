@@ -54,8 +54,8 @@
   :lighter ( :eval (wn-selected-window-modeline)))
 
 (defface wn-modeline-face
-  '((t ( :inherit mode-line)))
-  "wn-mode modeline face")
+  '((t nil))
+  "wn-mode modeline face.")
 
 (provide 'wn-mode)
 
