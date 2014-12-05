@@ -8,14 +8,17 @@ keyboard shortcuts to quickly switch between visible windows within
 the current Emacs frame.
 
 Install it via [MELPA](http://melpa.org) with:
+
     M-x package-install RET wn-mode RET
 
 To activate, simply add
+
     (wn-mode)
+
 to your `~/.emacs`.
 
 By default, the shortcuts are <kbd>M-1</kbd>, ..., <kbd>M-9</kbd>,
-<kbd>M-0</kbd>, <kbd>M-#<kbd/>.
+<kbd>M-0</kbd>, <kbd>M-#</kbd>.
 
 Customize `wn-keybinding-format` if you wish to use different key
 bindings, e.g.:
