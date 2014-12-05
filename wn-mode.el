@@ -32,6 +32,7 @@
   "Return a list of ordered windows on the current frame."
   (window-list (selected-frame) 0 (minibuffer-window)))
 
+;;;###autoload
 (defun wn-select-nth (n)
   "Select window number N in current frame."
   (interactive "nWindow number: ")
@@ -69,6 +70,7 @@ convenient but overrides built-in Emacs keybindings.")
 (defvar wn-mode-map (make-wn-mode-map)
   "wn-mode's keymap.")
 
+;;;###autoload
 (define-minor-mode wn-mode
   "A minor mode that enables quick selection of windows."
   :group 'windows
