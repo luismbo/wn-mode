@@ -93,7 +93,8 @@ convenient but overrides built-in Emacs keybindings.")
 
 (defface wn-modeline-face
   '((t nil))
-  "wn-mode modeline face.")
+  "wn-mode modeline face."
+  :group 'faces)
 
 (provide 'wn-mode)
 
