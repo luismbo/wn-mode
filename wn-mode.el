@@ -1,13 +1,13 @@
 ;;; wn-model.el -- numeric window switching shortcuts -*- lexical-binding: t -*-
 
-;; This library was found at the Emacs Wiki and is probably in the
-;; public domain.
-
 ;; URL: https://github.com/luismbo/wn-mode
 ;; Author: Anonymous
 ;; Maintainer: Luís Oliveira <luismbo@gmail.com>
 ;; Package-Requires: ((emacs "24"))
 ;; Keywords: buffers windows switching-windows
+
+;; This library was found at the Emacs Wiki and is probably in the
+;; public domain.
 
 ;;; Commentary:
 
