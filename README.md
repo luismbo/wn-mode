@@ -1,4 +1,4 @@
-[![MELPA](http://melpa.org/packages/wn-mode-badge.svg)](http://melpa.org/#/wn-mode)
+[![MELPA Stable](http://stable.melpa.org/packages/wn-mode-badge.svg)](http://stable.melpa.org/#/wn-mode) [![MELPA](http://melpa.org/packages/wn-mode-badge.svg)](http://melpa.org/#/wn-mode)
 
 wn-mode
 -------
