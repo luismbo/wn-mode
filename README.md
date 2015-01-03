@@ -17,13 +17,14 @@ To activate, simply add
 
 to your `~/.emacs`.
 
-By default, the shortcuts are <kbd>M-1</kbd>, ..., <kbd>M-9</kbd>,
-<kbd>M-0</kbd>, <kbd>M-#</kbd>.
+By default, the shortcuts are <kbd>M-1</kbd>, ..., <kbd>M-9</kbd> for
+selecting windows #1 through #9. <kbd>M-0</kbd> selects the
+minibuffer, if active. <kbd>M-#</kbd> interactively asks which window
+to select.
 
 Customize `wn-keybinding-format` if you wish to use different key
 bindings, e.g.:
 
     (setq wn-keybinding-format "C-c %s")
 
-Invoke <kbd>M-x remake-wn-mode-map</kbd> if you want it to take effect
-immediately.
+Re-enable `wn-mode` and the new keybindings will take effect.
