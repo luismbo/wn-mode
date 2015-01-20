@@ -72,7 +72,8 @@ of being convenient but overrides built-in Emacs keybindings.")
     (define-key keymap (kbd (format format-string i))
       (when set (lambda () (interactive) (wn-select-nth i)))))
   (define-key keymap (kbd (format format-string "#"))
-    (when set 'wn-select-nth)))
+    (when set 'wn-select-nth))
+  keymap)
 
 (defun wn--setup-keymap (keymap)
   "Clear `keymap' and define new key bindings according to
