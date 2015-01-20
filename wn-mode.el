@@ -1,4 +1,4 @@
-;;; wn-model.el --- numeric window switching shortcuts -*- lexical-binding: t -*-
+;;; wn-mode.el --- numeric window switching shortcuts -*- lexical-binding: t -*-
 
 ;; URL: https://github.com/luismbo/wn-mode
 ;; Author: Anonymous
