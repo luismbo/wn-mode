@@ -50,7 +50,7 @@
 (defun wn--selected-window-number ()
   "Return the number of the selected window"
   ;; this strange implementation avoids a dependency on cl-position!
-  (length (memq (selected-window) (reverse (wn--window-list)))))
+  (1- (length (memq (selected-window) (reverse (wn--window-list))))))
 
 (defun wn--selected-window-modeline ()
   "Return the string for the current window modeline."
