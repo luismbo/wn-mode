@@ -22,6 +22,9 @@ selecting windows #1 through #9. <kbd>M-0</kbd> selects the
 minibuffer, if active. <kbd>M-#</kbd> interactively asks which window
 to select.
 
+With a prefix argument, swaps the buffers between the current and
+target windows.
+
 Customize `wn-keybinding-format` if you wish to use different key
 bindings, e.g.:
 

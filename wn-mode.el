@@ -23,6 +23,9 @@
 ;; #1 through #9. M-0 selects the minibuffer, if active. M-#
 ;; interactively asks which window to select.
 ;;
+;; With a prefix argument, swaps the buffers between the current and
+;; the target windows.
+;;
 ;; Customize `wn-keybinding-format' if you wish to use different key
 ;; bindings, e.g.:
 ;;   (setq wn-keybinding-format "C-c %s")
@@ -35,17 +38,29 @@
   "Return a list of ordered windows on the current frame."
   (window-list (selected-frame) t (minibuffer-window)))
 
+(defun wn--check-window-validity (source-window target-window swap-buffers)
+  (when (and swap-buffers
+             (or (eq target-window (minibuffer-window))
+                 (eq source-window (minibuffer-window))))
+    (user-error "Cannot swap with the minibuffer"))
+  (when (null target-window)
+    (user-error "No such window"))
+  (when (and (eq target-window (minibuffer-window))
+             (not (active-minibuffer-window)))
+    (user-error "Minibuffer is inactive")))
+
 ;;;###autoload
-(defun wn-select-nth (n)
+(defun wn-select-nth (n &optional swap-buffers)
   "Select window number N in current frame."
-  (interactive "nWindow number: ")
-  (let ((window (nth n (wn--window-list))))
-    (cond ((null window)
-           (message "No such window."))
-          ((and (zerop n) (not (active-minibuffer-window)))
-           (message "Minibuffer is inactive."))
-          (t
-           (select-window window)))))
+  (interactive "nWindow number: \nP")
+  (let ((target-window (nth n (wn--window-list))))
+    (wn--check-window-validity (selected-window) target-window swap-buffers)
+    (when swap-buffers
+      (le3t ((target-buffer (window-buffer target-window))
+            (selected-buffer (window-buffer (selected-window))))
+        (set-window-buffer target-window selected-buffer)
+        (set-window-buffer (selected-window) target-buffer)))
+    (select-window target-window)))
 
 (defun wn--selected-window-number ()
   "Return the number of the selected window"
@@ -70,7 +85,10 @@ of being convenient but overrides built-in Emacs keybindings.")
   "Define or undefine wn-mode's key bindings."
   (dotimes (i 10)
     (define-key keymap (kbd (format format-string i))
-      (when set (lambda () (interactive) (wn-select-nth i)))))
+      (when set
+        (lambda (&optional swap-buffers)
+          (interactive "P")
+          (wn-select-nth i swap-buffers)))))
   (define-key keymap (kbd (format format-string "#"))
     (when set 'wn-select-nth))
   keymap)
