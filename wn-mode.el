@@ -56,7 +56,7 @@
   (let ((target-window (nth n (wn--window-list))))
     (wn--check-window-validity (selected-window) target-window swap-buffers)
     (when swap-buffers
-      (le3t ((target-buffer (window-buffer target-window))
+      (let ((target-buffer (window-buffer target-window))
             (selected-buffer (window-buffer (selected-window))))
         (set-window-buffer target-window selected-buffer)
         (set-window-buffer (selected-window) target-buffer)))
