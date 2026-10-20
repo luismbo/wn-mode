@@ -34,17 +34,35 @@
 
 ;;; Code:
 
+(defvar wn-mode-map)
+
+(defgroup wn-mode nil
+  "Numeric window switching shortcuts."
+  :group 'wn-mode
+  :prefix "wn-")
+
+(defface wn-modeline-face
+  '((t nil))
+  "Face used for the window number in the mode line."
+  :group 'wn-mode)
+
 (defun wn--window-list ()
   "Return a list of ordered windows on the current frame."
   (window-list (selected-frame) t (minibuffer-window)))
 
 (defun wn--check-window-validity (source-window target-window swap-buffers)
+  "Signal a `user-error' if SOURCE-WINDOW cannot switch to TARGET-WINDOW.
+SWAP-BUFFERS non-nil means the buffers would also be swapped."
   (when (and swap-buffers
              (or (eq target-window (minibuffer-window))
                  (eq source-window (minibuffer-window))))
     (user-error "Cannot swap with the minibuffer"))
   (when (null target-window)
     (user-error "No such window"))
+  (when (and swap-buffers
+             (or (window-dedicated-p target-window)
+                 (window-dedicated-p source-window)))
+    (user-error "Cannot swap buffers of a dedicated window"))
   (when (and (eq target-window (minibuffer-window))
              (not (active-minibuffer-window)))
     (user-error "Minibuffer is inactive")))
@@ -74,11 +92,14 @@ selected window and the target window."
   (propertize (format " #%s" (wn--selected-window-number))
               'face 'wn-modeline-face))
 
-(defvar wn-keybinding-format "M-%s"
+(defcustom wn-keybinding-format "M-%s"
   "Define how the numeric keybindings should be set up.
 
 By default we use M-0, M-1, ..., M-9, M-# which has the advantage
-of being convenient but overrides built-in Emacs keybindings.")
+of being convenient but overrides built-in Emacs keybindings.
+Re-enable `wn-mode' for a change to take effect."
+  :type 'string
+  :group 'wn-mode)
 
 (defvar wn--previous-keybinding-format wn-keybinding-format
   "Used by `wn--setup-keymap' to clear previous key bindings.")
@@ -106,18 +127,13 @@ The new bindings are set according to `wn-keybinding-format'."
 ;;;###autoload
 (define-minor-mode wn-mode
   "A minor mode that enables quick selection of windows."
-  :group 'windows
+  :group 'wn-mode
   :global t
   :init-value nil
   :keymap (wn--setup-keymap (make-sparse-keymap))
   :lighter (:eval (wn--selected-window-modeline))
   ;; recompute the keymap each time wn-mode is activated.
   (wn--setup-keymap wn-mode-map))
-
-(defface wn-modeline-face
-  '((t nil))
-  "wn-mode modeline face."
-  :group 'faces)
 
 (provide 'wn-mode)
 
