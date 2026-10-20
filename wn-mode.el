@@ -51,7 +51,9 @@
 
 ;;;###autoload
 (defun wn-select-nth (n &optional swap-buffers)
-  "Select window number N in current frame."
+  "Select window number N in current frame.
+With a prefix argument SWAP-BUFFERS, also swap the buffers of the
+selected window and the target window."
   (interactive "nWindow number: \nP")
   (let ((target-window (nth n (wn--window-list))))
     (wn--check-window-validity (selected-window) target-window swap-buffers)
@@ -63,7 +65,7 @@
     (select-window target-window)))
 
 (defun wn--selected-window-number ()
-  "Return the number of the selected window"
+  "Return the number of the selected window."
   ;; this strange implementation avoids a dependency on cl-position!
   (1- (length (memq (selected-window) (reverse (wn--window-list))))))
 
@@ -82,7 +84,8 @@ of being convenient but overrides built-in Emacs keybindings.")
   "Used by `wn--setup-keymap' to clear previous key bindings.")
 
 (defun wn--define-keys (keymap format-string set)
-  "Define or undefine wn-mode's key bindings."
+  "Define or undefine wn-mode's key bindings in KEYMAP.
+FORMAT-STRING is the key format; bindings are removed unless SET."
   (dotimes (i 10)
     (define-key keymap (kbd (format format-string i))
       (when set
@@ -94,8 +97,8 @@ of being convenient but overrides built-in Emacs keybindings.")
   keymap)
 
 (defun wn--setup-keymap (keymap)
-  "Clear `keymap' and define new key bindings according to
-`wn-keybinding-format'."
+  "Clear KEYMAP and define new key bindings.
+The new bindings are set according to `wn-keybinding-format'."
   (wn--define-keys keymap wn--previous-keybinding-format nil)
   (setq wn--previous-keybinding-format wn-keybinding-format)
   (wn--define-keys keymap wn-keybinding-format t))
